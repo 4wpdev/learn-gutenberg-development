@@ -1,0 +1,29 @@
+{
+	"name": "forwp/learn-gutenberg-development",
+	"version": "0.1.0",
+	"description": "Learn Gutenberg Development — WordPress plugin educational codebase (4WP.dev)",
+	"type": "wordpress-plugin",
+	"license": "GPL-2.0-or-later",
+	"require": {
+		"php": ">=7.4"
+	},
+	"require-dev": {
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+		"phpcompatibility/phpcompatibility-wp": "^2.1",
+		"squizlabs/php_codesniffer": "^3.10",
+		"wp-coding-standards/wpcs": "^3.1"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		},
+		"platform": {
+			"php": "7.4"
+		}
+	},
+	"scripts": {
+		"phpcs": "phpcs --colors",
+		"phpcbf": "phpcbf --colors",
+		"lint:php": "@phpcs"
+	}
+}

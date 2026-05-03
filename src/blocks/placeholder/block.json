@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "learn-gutenberg/placeholder",
+	"version": "0.1.0",
+	"title": "Placeholder",
+	"category": "forwp-gutenberg-components",
+	"icon": "info-outline",
+	"description": "Scaffold block for Learn Gutenberg Development.",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"message": {
+			"type": "string",
+			"default": "Learn Gutenberg Development — Placeholder."
+		}
+	},
+	"textdomain": "learn-gutenberg-development",
+	"editorScript": "file:./index.js"
+}

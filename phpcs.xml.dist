@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<ruleset name="Learn Gutenberg Development">
+	<description>PHP_CodeSniffer — WordPress standards (PHP only). Use npm run lint:js for JavaScript.</description>
+
+	<!-- Scope PHP only; JSX/React triggers false positives under Squiz/WPCS sniff overlap. -->
+	<file>learn-gutenberg-development.php</file>
+	<file>includes</file>
+
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+	<exclude-pattern>*/build/*</exclude-pattern>
+	<exclude-pattern>*.js</exclude-pattern>
+
+	<rule ref="WordPress-Core"/>
+
+	<!-- PHPCompatibilityWP omitted: older php-compatibility sniffs can error on PHP 8.1+ (trim(null)). Add rule back after upgrading packages. -->
+
+</ruleset>
+

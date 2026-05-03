@@ -1,0 +1,8 @@
+/node_modules/
+/vendor/
+/build/
+*.log
+.DS_Store
+
+# Local release artifact (attach to GitHub Release instead of committing)
+/learn-gutenberg-development-*.zip
