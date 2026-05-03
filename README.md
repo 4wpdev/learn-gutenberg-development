@@ -9,8 +9,8 @@ This repository is a **WordPress plugin** you can drop into `wp-content/plugins/
 ## v0.1.1 — Placeholder Component
 
 - **Install-ready ZIP** (includes compiled `build/` — no `npm install` needed): download **`learn-gutenberg-development-0.1.1.zip`** from [GitHub Releases](https://github.com/4wpdev/learn-gutenberg-development/releases), then in wp-admin go to **Plugins → Add New → Upload Plugin** and activate **Learn Gutenberg Development**.
-- **Try in WordPress Playground (blueprint):** one click opens a fresh WordPress in the browser, downloads the **same release ZIP** from GitHub, installs and activates this plugin — [**Open in Playground**](https://playground.wordpress.net/?blueprint-url=https%3A%2F%2Fraw.githubusercontent.com%2F4wpdev%2Flearn-gutenberg-development%2Fv0.1.1%2Fplayground-blueprint.json). Blueprint source: [`playground-blueprint.json`](playground-blueprint.json). Docs: [WordPress Playground — Blueprints](https://wordpress.github.io/wordpress-playground/blueprints).
-- **Site landing (optional):** [4WP.dev — Gutenberg sandbox hub](https://4wp.dev/gutenberg/sandbox) — short URL or extra lesson context on **4wp.dev**; the runnable demo is Playground + the blueprint above.
+- **Try in WordPress Playground (blueprint):** opens WordPress in the browser, downloads the **`main`** branch snapshot from GitHub (includes committed `build/`), installs and activates this plugin, then lands on **new page** in the editor — [**Open in Playground**](https://playground.wordpress.net/?blueprint-url=https%3A%2F%2Fraw.githubusercontent.com%2F4wpdev%2Flearn-gutenberg-development%2Fmain%2Fplayground-blueprint.json). Blueprint: [`playground-blueprint.json`](playground-blueprint.json). Docs: [WordPress Playground — Blueprints](https://wordpress.github.io/wordpress-playground/blueprints).
+
 
 Build the ZIP locally (maintainers):
 
@@ -19,9 +19,11 @@ npm install
 npm run release:zip
 ```
 
-Produces `learn-gutenberg-development-0.1.1.zip` in this directory (gitignored). Attach it when publishing the GitHub release for this tag so the Playground blueprint can download the plugin.
+Produces `learn-gutenberg-development-0.1.1.zip` in this directory (gitignored). Attach it when publishing the GitHub release for this tag.
 
-**Release checklist:** attach **`learn-gutenberg-development-0.1.1.zip`** to tag **`v0.1.1`** (same filename as in [`playground-blueprint.json`](playground-blueprint.json)), commit **[`playground-blueprint.json`](playground-blueprint.json)** on that tag so the raw GitHub URL in the Playground link returns JSON.
+**Playground:** the demo uses the **[`main` branch archive](https://github.com/4wpdev/learn-gutenberg-development/archive/refs/heads/main.zip)** so it works without a release asset; **`build/` must stay committed** (compiled blocks). After changing blocks, run `npm run build` and commit `build/` before expecting Playground to match.
+
+**Release checklist:** attach **`learn-gutenberg-development-0.1.1.zip`** to **`v0.1.1`** on GitHub if you publish formal downloads; keep **[`playground-blueprint.json`](playground-blueprint.json)** on **`main`** so the README Playground link resolves.
 
 ## Scope
 
@@ -53,7 +55,7 @@ learn-gutenberg-development/
 ├── package.json                      # @wordpress/scripts
 ├── includes/                         # PHP (category + block registration)
 ├── src/blocks/<slug>/                # Block sources + block.json
-├── build/blocks/<slug>/              # Compiled assets (generated; gitignored)
+├── build/blocks/<slug>/              # Compiled assets (committed so Playground archive includes blocks)
 ├── playground-blueprint.json         # WordPress Playground: install release ZIP from GitHub
 └── scripts/build-release-zip.sh      # Maintainer: npm run release:zip
 ```
