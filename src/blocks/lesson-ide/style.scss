@@ -1,0 +1,457 @@
+/**
+ * Frontend + shared tokens (loaded with viewScript too).
+ */
+
+.wp-block-learn-gutenberg-lesson-ide.forwp-lesson-ide,
+.forwp-lesson-ide {
+	--forwp-ide-bg: #1e1e1e;
+	--forwp-ide-sidebar: #252526;
+	--forwp-ide-border: #3c3c3c;
+	--forwp-ide-text: #cccccc;
+	--forwp-ide-dim: #858585;
+	--forwp-ide-accent: #007acc;
+	--forwp-ide-tab-active: #1e1e1e;
+}
+
+.forwp-lesson-ide {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	background: var(--forwp-ide-bg);
+	color: var(--forwp-ide-text);
+	border: 1px solid var(--forwp-ide-border);
+	border-radius: 6px;
+	overflow: hidden;
+	min-height: 420px;
+	height: 90vh;
+	max-height: 90vh;
+	max-height: min(90vh, 100dvh);
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	font-size: 13px;
+	line-height: 1.45;
+}
+
+/**
+ * Cover saved markup until view.js finishes (REST + CodeMirror) to avoid width/layout flicker.
+ */
+.wp-block-learn-gutenberg-lesson-ide.forwp-lesson-ide.forwp-lesson-ide--booting {
+	position: relative;
+	overflow-x: hidden;
+	max-width: 100%;
+}
+
+.wp-block-learn-gutenberg-lesson-ide.forwp-lesson-ide.forwp-lesson-ide--booting::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 40;
+	background: var(--forwp-ide-bg);
+	pointer-events: none;
+}
+
+.forwp-lesson-ide *,
+.forwp-lesson-ide *::before,
+.forwp-lesson-ide *::after {
+	box-sizing: border-box;
+}
+
+.forwp-lesson-ide__header {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	flex-shrink: 0;
+	height: 32px;
+	padding: 0 8px;
+	background: #323233;
+	border-bottom: 1px solid var(--forwp-ide-border);
+}
+
+.forwp-lesson-ide__fullscreen {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 28px;
+	height: 26px;
+	padding: 0 8px;
+	background: transparent;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: var(--forwp-ide-text);
+	cursor: pointer;
+}
+
+.forwp-lesson-ide__fullscreen:hover {
+	background: rgba(255, 255, 255, 0.08);
+}
+
+.forwp-lesson-ide__body {
+	display: grid;
+	grid-template-columns: 220px 1fr;
+	grid-template-rows: minmax(0, 1fr) auto;
+	box-sizing: border-box;
+	flex: 1 1 auto;
+	min-height: 0;
+	height: auto;
+	max-height: none;
+	overflow: hidden;
+}
+
+/**
+ * Fullscreen: fill viewport (100vh); editor column ~90% height, terminal ~10%.
+ */
+.wp-block-learn-gutenberg-lesson-ide.forwp-lesson-ide:fullscreen,
+.wp-block-learn-gutenberg-lesson-ide.forwp-lesson-ide:-webkit-full-screen {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	min-height: 100vh;
+	height: 100vh;
+	max-height: 100vh;
+	min-height: 100dvh;
+	height: 100dvh;
+	max-height: 100dvh;
+	border-radius: 0;
+}
+
+.wp-block-learn-gutenberg-lesson-ide.forwp-lesson-ide:fullscreen .forwp-lesson-ide__header,
+.wp-block-learn-gutenberg-lesson-ide.forwp-lesson-ide:-webkit-full-screen .forwp-lesson-ide__header {
+	flex-shrink: 0;
+}
+
+.wp-block-learn-gutenberg-lesson-ide.forwp-lesson-ide:fullscreen .forwp-lesson-ide__body,
+.wp-block-learn-gutenberg-lesson-ide.forwp-lesson-ide:-webkit-full-screen .forwp-lesson-ide__body {
+	flex: 1 1 auto;
+	min-height: 0;
+	height: auto;
+	max-height: none;
+	grid-template-rows: minmax(0, 9fr) minmax(0, 1fr);
+}
+
+.wp-block-learn-gutenberg-lesson-ide.forwp-lesson-ide:fullscreen .forwp-lesson-ide__terminal,
+.wp-block-learn-gutenberg-lesson-ide.forwp-lesson-ide:-webkit-full-screen .forwp-lesson-ide__terminal {
+	min-height: 0;
+	max-height: none;
+	flex-shrink: 0;
+}
+
+.forwp-lesson-ide__sidebar {
+	grid-row: 1 / span 2;
+	grid-column: 1;
+	background: var(--forwp-ide-sidebar);
+	border-right: 1px solid var(--forwp-ide-border);
+	overflow: auto;
+	padding: 8px 0;
+}
+
+.forwp-lesson-ide__sidebar-title {
+	padding: 6px 12px;
+	font-size: 11px;
+	font-weight: 600;
+	color: var(--forwp-ide-dim);
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+.forwp-lesson-ide__tree {
+	list-style: none;
+	margin: 0;
+	padding: 0 6px 0 4px;
+}
+
+.forwp-lesson-ide__tree--root {
+	padding-right: 8px;
+}
+
+.forwp-lesson-ide__tree--nested {
+	margin: 0;
+	padding: 2px 0 4px 10px;
+	border-left: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.forwp-lesson-ide__tree-node {
+	margin: 0;
+	list-style: none;
+}
+
+.forwp-lesson-ide__tree-row {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+	min-height: 22px;
+	padding: 1px 4px;
+	border-radius: 3px;
+	color: var(--forwp-ide-text);
+	font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+	font-size: 12px;
+	white-space: nowrap;
+}
+
+.forwp-lesson-ide__tree-chevron {
+	flex: 0 0 14px;
+	text-align: center;
+	font-size: 9px;
+	line-height: 1;
+	color: var(--forwp-ide-dim);
+	user-select: none;
+}
+
+.forwp-lesson-ide__tree-chevron--spacer {
+	opacity: 0.35;
+}
+
+.forwp-lesson-ide__tree-label {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	flex: 1;
+	min-width: 0;
+}
+
+.forwp-lesson-ide__tree-row--file {
+	cursor: default;
+}
+
+.forwp-lesson-ide__tree-row--file:hover {
+	background: rgba(255, 255, 255, 0.06);
+	cursor: pointer;
+}
+
+.forwp-lesson-ide__tree-item--active {
+	background: rgba(255, 255, 255, 0.12);
+	color: #fff;
+}
+
+.forwp-lesson-ide__tree-row--dir {
+	color: var(--forwp-ide-dim);
+	font-weight: 600;
+	font-size: 11px;
+	cursor: pointer;
+}
+
+.forwp-lesson-ide__tree-row--dir:hover {
+	background: rgba(255, 255, 255, 0.06);
+	color: var(--forwp-ide-text);
+}
+
+.forwp-lesson-ide__main {
+	grid-column: 2;
+	grid-row: 1;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	min-height: 0;
+	background: var(--forwp-ide-bg);
+}
+
+.forwp-lesson-ide__tabs {
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: flex-end;
+	background: #252526;
+	border-bottom: 1px solid var(--forwp-ide-border);
+	min-height: 32px;
+	overflow-x: auto;
+}
+
+.forwp-lesson-ide__tab {
+	flex: 0 0 auto;
+	padding: 6px 14px;
+	background: #2d2d2d;
+	border: 1px solid transparent;
+	border-bottom: none;
+	border-radius: 6px 6px 0 0;
+	margin-right: 2px;
+	color: var(--forwp-ide-dim);
+	font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+	font-size: 12px;
+	cursor: default;
+}
+
+.forwp-lesson-ide__tab--active {
+	background: var(--forwp-ide-tab-active);
+	color: #fff;
+	border-color: var(--forwp-ide-border);
+	border-bottom-color: var(--forwp-ide-tab-active);
+	margin-bottom: -1px;
+	padding-bottom: 7px;
+}
+
+.forwp-lesson-ide__editor-wrap {
+	flex: 1;
+	min-width: 0;
+	min-height: 0;
+	overflow: hidden;
+	overscroll-behavior: contain;
+	display: flex;
+	flex-direction: column;
+}
+
+.forwp-lesson-ide__codemirror-wrap {
+	flex: 1;
+	min-width: 0;
+	min-height: 0;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.forwp-lesson-ide__codemirror-wrap .cm-editor {
+	flex: 1;
+	min-height: 0;
+}
+
+.forwp-lesson-ide__breadcrumbs {
+	padding: 6px 12px;
+	font-size: 11px;
+	color: var(--forwp-ide-dim);
+	border-bottom: 1px solid var(--forwp-ide-border);
+	font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.forwp-lesson-ide__highlight {
+	flex: 1;
+	min-height: 120px;
+	max-height: none;
+	margin: 0;
+	padding: 12px;
+	overflow: auto;
+	font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+	font-size: 12px;
+	line-height: 1.5;
+}
+
+.forwp-lesson-ide__highlight code.forwp-lesson-ide__code {
+	display: block;
+	white-space: pre;
+	overflow-x: auto;
+	max-width: 100%;
+	background: transparent !important;
+	padding: 0 !important;
+	tab-size: 2;
+	-moz-tab-size: 2;
+}
+
+.wp-block-learn-gutenberg-lesson-ide.forwp-lesson-ide--booting .forwp-lesson-ide__highlight {
+	overflow-x: hidden;
+	max-width: 100%;
+}
+
+.forwp-lesson-ide__terminal {
+	grid-column: 2;
+	grid-row: 2;
+	border-top: 1px solid var(--forwp-ide-border);
+	background: #1e1e1e;
+	min-height: 120px;
+	max-height: 180px;
+	display: flex;
+	flex-direction: column;
+}
+
+.forwp-lesson-ide__terminal-bar {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	flex-wrap: nowrap;
+	gap: 6px;
+	height: 28px;
+	padding: 0 8px;
+	background: #252526;
+	border-bottom: 1px solid var(--forwp-ide-border);
+	font-size: 11px;
+	color: var(--forwp-ide-text);
+}
+
+.forwp-lesson-ide__terminal-bar-label {
+	padding: 2px 10px;
+	border-bottom: 2px solid var(--forwp-ide-accent);
+	margin-bottom: -1px;
+	font-weight: 600;
+}
+
+.forwp-lesson-ide__terminal-run {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	width: 28px;
+	height: 22px;
+	padding: 0;
+	border: 1px solid var(--forwp-ide-accent);
+	border-radius: 4px;
+	background: rgba(0, 122, 204, 0.14);
+	box-shadow: inset 0 0 0 1px rgba(0, 122, 204, 0.25);
+	color: var(--forwp-ide-accent);
+	cursor: pointer;
+}
+
+.forwp-lesson-ide__terminal-run:hover {
+	background: rgba(0, 122, 204, 0.26);
+	border-color: #4eb3ff;
+	color: #9bdcff;
+	box-shadow:
+		inset 0 0 0 1px rgba(78, 179, 255, 0.45),
+		0 0 0 1px rgba(0, 122, 204, 0.35);
+}
+
+.forwp-lesson-ide__terminal-run:focus-visible {
+	outline: 2px solid var(--forwp-ide-accent);
+	outline-offset: 2px;
+}
+
+.forwp-lesson-ide__terminal-run-icon {
+	display: block;
+}
+
+.forwp-lesson-ide__terminal-body {
+	flex: 1;
+	overflow: auto;
+	padding: 8px 12px;
+	font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+	font-size: 12px;
+	line-height: 1.5;
+	color: #cccccc;
+	margin: 0;
+	white-space: pre-wrap;
+}
+
+.forwp-lesson-ide__terminal-placeholder {
+	color: var(--forwp-ide-dim);
+	font-style: italic;
+}
+
+@media (max-width: 600px) {
+	.forwp-lesson-ide {
+		height: min(90vh, 100dvh);
+		max-height: min(96vh, 100dvh);
+	}
+
+	.forwp-lesson-ide__body {
+		grid-template-columns: 1fr;
+		grid-template-rows: auto minmax(0, 1fr) auto;
+	}
+
+	.forwp-lesson-ide__sidebar {
+		grid-column: 1;
+		grid-row: 1;
+		max-height: 140px;
+		border-right: none;
+		border-bottom: 1px solid var(--forwp-ide-border);
+	}
+
+	.forwp-lesson-ide__main {
+		grid-column: 1;
+		grid-row: 2;
+	}
+
+	.forwp-lesson-ide__terminal {
+		grid-column: 1;
+		grid-row: 3;
+		min-height: 52px;
+		max-height: min(88px, 14vh);
+		flex-shrink: 0;
+	}
+
+	.forwp-lesson-ide__terminal-body {
+		min-height: 0;
+		max-height: 48px;
+	}
+}

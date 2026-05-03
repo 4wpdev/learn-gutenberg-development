@@ -1,0 +1,15 @@
+/**
+ * Editor canvas: subtle outline so the shell reads as a component.
+ */
+
+.wp-block-learn-gutenberg-lesson-ide.forwp-lesson-ide {
+	outline: 1px dashed rgba(128, 128, 128, 0.35);
+	outline-offset: 2px;
+}
+
+.forwp-lesson-ide__editor-wrap--editor {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	min-height: 0;
+}

@@ -6,9 +6,9 @@ This repository is a **WordPress plugin** you can drop into `wp-content/plugins/
 
 **Site:** [https://4wp.dev/](https://4wp.dev/)
 
-## v0.1.1 — Placeholder Component
+## v0.1.1 — Placeholder block & Lesson IDE
 
-- **Install-ready ZIP** (includes compiled `build/` — no `npm install` needed): download **`learn-gutenberg-development-0.1.1.zip`** from [GitHub Releases](https://github.com/4wpdev/learn-gutenberg-development/releases), then in wp-admin go to **Plugins → Add New → Upload Plugin** and activate **Learn Gutenberg Development**.
+- **Install-ready ZIP** (includes compiled `build/` — no `npm install` needed): download **`learn-gutenberg-development-0.1.1.zip`** from [GitHub Releases](https://github.com/4wpdev/learn-gutenberg-development/releases), then in wp-admin go to **Plugins → Add New → Upload Plugin** and activate **Learn Gutenberg Development**. The ZIP includes **`learn-gutenberg/lesson-ide`** (build outputs under `build/blocks/lesson-ide/`).
 - **Try in WordPress Playground (blueprint):** opens WordPress in the browser, downloads the **`main`** branch snapshot from GitHub (includes committed `build/`), installs and activates this plugin, then lands on **new page** in the editor — [**Open in Playground**](https://playground.wordpress.net/?blueprint-url=https%3A%2F%2Fraw.githubusercontent.com%2F4wpdev%2Flearn-gutenberg-development%2Fmain%2Fplayground-blueprint.json). Blueprint: [`playground-blueprint.json`](playground-blueprint.json). Docs: [WordPress Playground — Blueprints](https://wordpress.github.io/wordpress-playground/blueprints).
 
 
@@ -29,6 +29,7 @@ Produces `learn-gutenberg-development-0.1.1.zip` in this directory (gitignored).
 
 - **Components segment:** [`@wordpress/components`](https://developer.wordpress.org/block-editor/reference-guides/components/) — short lessons, examples, and articles under [4wp.dev/gutenberg/components](https://4wp.dev/gutenberg/components).
 - **Broader track:** the same repo grows with blocks, theme-related examples, and course-level content — not limited to components.
+- **Lesson IDE (`learn-gutenberg/lesson-ide`):** VS Code–style shell — file tree (REST reads plugin block sources + embedded snapshot), **CodeMirror 6** editor (JSX/JSON, folding), typing demo + **Run npm run build** terminal emulation on front-end via `viewScript` + shared `style-index.css`.
 
 ## Requirements
 
@@ -38,7 +39,7 @@ Produces `learn-gutenberg-development-0.1.1.zip` in this directory (gitignored).
 
 ## Installation
 
-**From a release (recommended for learners):** use the ZIP from [Releases](https://github.com/4wpdev/learn-gutenberg-development/releases) — see **v0.1.1 — Placeholder Component** above.
+**From a release (recommended for learners):** use the ZIP from [Releases](https://github.com/4wpdev/learn-gutenberg-development/releases) — see **v0.1.1 — Placeholder block & Lesson IDE** above.
 
 **From git (developers):**
 
@@ -53,6 +54,7 @@ learn-gutenberg-development/
 ├── README.md
 ├── learn-gutenberg-development.php   # Main plugin file
 ├── package.json                      # @wordpress/scripts
+├── assets/                           # Readme / promo screenshots (e.g. assets/blocks/<slug>/)
 ├── includes/                         # PHP (category + block registration)
 ├── src/blocks/<slug>/                # Block sources + block.json
 ├── build/blocks/<slug>/              # Compiled assets (committed so Playground archive includes blocks)

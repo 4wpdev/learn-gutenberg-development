@@ -1,0 +1,62 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "learn-gutenberg/lesson-ide",
+  "version": "0.1.1",
+  "title": "Lesson IDE",
+  "category": "forwp-gutenberg-components",
+  "icon": "desktop",
+  "description": "VS Code–style lesson shell: file tree, syntax-highlighted editor, terminal demo.",
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "demoBlockSlug": {
+      "type": "string",
+      "default": "learn-gutenberg/placeholder"
+    },
+    "structureUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "structureJson": {
+      "type": "string",
+      "default": ""
+    },
+    "files": {
+      "type": "array",
+      "default": [
+        {
+          "name": "index.js",
+          "language": "javascript",
+          "content": ""
+        }
+      ]
+    },
+    "activeFile": {
+      "type": "string",
+      "default": "index.js"
+    },
+    "terminalSnapshot": {
+      "type": "string",
+      "default": ""
+    },
+    "typingChunkChars": {
+      "type": "number",
+      "default": 2
+    },
+    "typingIntervalMs": {
+      "type": "number",
+      "default": 42
+    },
+    "ideBreadcrumb": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "textdomain": "learn-gutenberg-development",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js"
+}
