@@ -1,0 +1,25 @@
+{
+	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"landingPage": "/wp-admin/post-new.php?post_type=page",
+	"preferredVersions": {
+		"php": "8.2",
+		"wp": "latest"
+	},
+	"features": {
+		"networking": true
+	},
+	"login": true,
+	"steps": [
+		{
+			"step": "installPlugin",
+			"pluginData": {
+				"resource": "url",
+				"url": "https://github.com/4wpdev/learn-gutenberg-development/releases/download/v0.1.2/learn-gutenberg-development-0.1.2.zip",
+				"caption": "Learn Gutenberg Development 0.1.2"
+			},
+			"options": {
+				"activate": true
+			}
+		}
+	]
+}

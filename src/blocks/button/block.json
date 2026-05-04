@@ -1,0 +1,63 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "learn-gutenberg/button",
+	"version": "0.1.2",
+	"title": "Button",
+	"category": "forwp-gutenberg-components",
+	"icon": "button",
+	"description": "Button block for Learn Gutenberg Development.",
+	"example": {
+		"attributes": {
+			"label": "4WP.dev/Learn-Gutenberg-Development",
+			"icon": "github",
+			"iconPosition": "left"
+		},
+		"viewportWidth": 420
+	},
+	"supports": {
+		"html": false,
+		"color": {
+			"background": true,
+			"text": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true
+		},
+		"spacing": {
+			"padding": true,
+			"margin": true
+		},
+		"__experimentalBorder": {
+			"color": true,
+			"radius": true,
+			"style": true,
+			"width": true
+		}
+	},
+	"attributes": {
+		"label": {
+			"type": "string",
+			"default": "Learn Gutenberg"
+		},
+		"icon": {
+			"type": "string",
+			"enum": ["none", "star", "heart", "arrowRight", "wordpress", "github", "youtube", "linkedin"],
+			"default": "none"
+		},
+		"iconPosition": {
+			"type": "string",
+			"enum": ["left", "right"],
+			"default": "left"
+		}
+	},
+	"styles": [
+		{ "name": "fill", "label": "Fill", "isDefault": true },
+		{ "name": "outline", "label": "Outline" }
+	],
+	"textdomain": "learn-gutenberg-development",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

@@ -28,3 +28,4 @@ function learn_gutenberg_development_register_blocks() {
 	}
 }
 add_action( 'init', 'learn_gutenberg_development_register_blocks', 20 );
+

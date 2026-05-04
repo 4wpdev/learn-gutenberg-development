@@ -7,6 +7,12 @@
   "category": "forwp-gutenberg-components",
   "icon": "desktop",
   "description": "VS Code–style lesson shell: file tree, syntax-highlighted editor, terminal demo.",
+  "example": {
+    "attributes": {
+      "demoBlockSlug": "learn-gutenberg/placeholder"
+    },
+    "viewportWidth": 620
+  },
   "supports": {
     "html": false
   },

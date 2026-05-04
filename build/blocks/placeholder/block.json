@@ -7,6 +7,12 @@
   "category": "forwp-gutenberg-components",
   "icon": "info-outline",
   "description": "Scaffold block for Learn Gutenberg Development.",
+  "example": {
+    "attributes": {
+      "message": "Learn Gutenberg Development — Placeholder."
+    },
+    "viewportWidth": 320
+  },
   "supports": {
     "html": false
   },

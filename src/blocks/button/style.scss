@@ -1,0 +1,149 @@
+$wp-component-accent: #2271b1;
+
+/* Block root is the button element (useBlockProps on <button>) */
+.wp-block-learn-gutenberg-button.forwp-cbtn {
+	box-sizing: border-box;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5em;
+	min-width: 8rem;
+	padding: 0.65em 1.25em;
+	font-size: 1rem;
+	line-height: 1.2;
+	font-weight: 600;
+	border-radius: 6px;
+	border: 2px solid transparent;
+	cursor: pointer;
+	text-decoration: none;
+	font-family: inherit;
+
+	svg {
+		width: 20px;
+		height: 20px;
+		flex-shrink: 0;
+	}
+
+	.forwp-cbtn__label {
+		display: inline-block;
+	}
+
+	&.is-style-fill {
+		background: $wp-component-accent;
+		border-color: $wp-component-accent;
+		color: #fff;
+
+		svg {
+			fill: currentColor;
+		}
+	}
+
+	&.is-style-outline {
+		background: transparent;
+		border-color: $wp-component-accent;
+		color: $wp-component-accent;
+
+		svg {
+			fill: currentColor;
+		}
+	}
+}
+
+/* Legacy: outer wrapper is not the button; styles on block + inner .forwp-cbtn */
+.wp-block-learn-gutenberg-button {
+	.forwp-cbtn {
+		box-sizing: border-box;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5em;
+		min-width: 8rem;
+		padding: 0.65em 1.25em;
+		font-size: 1rem;
+		line-height: 1.2;
+		font-weight: 600;
+		border-radius: 6px;
+		border: 2px solid transparent;
+		cursor: pointer;
+		text-decoration: none;
+		font-family: inherit;
+
+		svg {
+			width: 20px;
+			height: 20px;
+			flex-shrink: 0;
+		}
+
+		.forwp-cbtn__label {
+			display: inline-block;
+		}
+
+		.dashicons {
+			width: 20px;
+			height: 20px;
+			font-size: 20px;
+			line-height: 1;
+		}
+	}
+
+	&:not( .forwp-cbtn ) {
+		&.is-style-fill .forwp-cbtn {
+			background: $wp-component-accent;
+			border-color: $wp-component-accent;
+			color: #fff;
+
+			.dashicons {
+				color: #fff;
+			}
+
+			svg {
+				fill: currentColor;
+			}
+		}
+
+		&.is-style-outline .forwp-cbtn {
+			background: transparent;
+			border-color: $wp-component-accent;
+			color: $wp-component-accent;
+
+			.dashicons {
+				color: $wp-component-accent;
+			}
+
+			svg {
+				fill: currentColor;
+			}
+		}
+	}
+
+	.forwp-cbtn--rect {
+		min-width: 8rem;
+	}
+
+	.forwp-cbtn--square {
+		width: 3rem;
+		height: 3rem;
+		min-width: 3rem;
+		padding: 0;
+	}
+
+	.forwp-cbtn--filled {
+		background: $wp-component-accent;
+		border-color: $wp-component-accent;
+		color: #fff;
+
+		.dashicons {
+			color: #fff;
+		}
+	}
+
+	.forwp-cbtn--outline {
+		background: transparent;
+		border-color: $wp-component-accent;
+		color: $wp-component-accent;
+
+		.dashicons {
+			color: $wp-component-accent;
+		}
+	}
+}

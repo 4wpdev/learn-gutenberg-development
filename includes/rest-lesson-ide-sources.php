@@ -34,6 +34,16 @@ function learn_gutenberg_development_register_ide_sources_rest() {
 			'callback'            => 'learn_gutenberg_development_rest_get_ide_sources',
 		)
 	);
+
+	register_rest_route(
+		'learn-gutenberg/v1',
+		'/ide-block-catalog',
+		array(
+			'methods'             => WP_REST_Server::READABLE,
+			'permission_callback' => '__return_true',
+			'callback'            => 'learn_gutenberg_development_rest_get_ide_block_catalog',
+		)
+	);
 }
 add_action( 'rest_api_init', 'learn_gutenberg_development_register_ide_sources_rest' );
 
@@ -79,6 +89,76 @@ function learn_gutenberg_development_ide_src_root_for_block( $block_name ) {
 	}
 
 	return $requested;
+}
+
+/**
+ * Lists blocks under src/blocks/ that Lesson IDE may mirror (each folder with valid block.json).
+ * Excludes `lesson-ide` (the IDE block itself).
+ *
+ * @return array<int, array{slug: string, title: string}>
+ */
+function learn_gutenberg_development_list_ide_eligible_blocks() {
+	$blocks_root = trailingslashit( LEARN_GUTENBERG_DEVELOPMENT_PLUGIN_DIR ) . 'src/blocks/';
+	$real_root   = realpath( $blocks_root );
+	if ( false === $real_root ) {
+		return array();
+	}
+
+	$list = scandir( $blocks_root, SCANDIR_SORT_ASCENDING );
+	if ( ! is_array( $list ) ) {
+		return array();
+	}
+
+	$out = array();
+	foreach ( $list as $name ) {
+		if ( '.' === $name || '..' === $name || 'lesson-ide' === $name ) {
+			continue;
+		}
+		$sub = $blocks_root . $name;
+		if ( ! is_dir( $sub ) ) {
+			continue;
+		}
+		$expected_name = 'learn-gutenberg/' . $name;
+		$root          = learn_gutenberg_development_ide_src_root_for_block( $expected_name );
+		if ( null === $root ) {
+			continue;
+		}
+		$bj = $root . '/block.json';
+		if ( ! is_readable( $bj ) ) {
+			continue;
+		}
+		$meta = json_decode( (string) file_get_contents( $bj ), true );
+		$title = ( is_array( $meta ) && ! empty( $meta['title'] ) && is_string( $meta['title'] ) )
+			? $meta['title']
+			: $name;
+		$out[] = array(
+			'slug'  => $expected_name,
+			'title' => $title,
+		);
+	}
+
+	usort(
+		$out,
+		function ( $a, $b ) {
+			return strnatcasecmp( $a['title'], $b['title'] );
+		}
+	);
+
+	return $out;
+}
+
+/**
+ * REST: GET /ide-block-catalog — block titles for the Lesson IDE source picker.
+ *
+ * @return WP_REST_Response
+ */
+function learn_gutenberg_development_rest_get_ide_block_catalog() {
+	$blocks = learn_gutenberg_development_list_ide_eligible_blocks();
+	return rest_ensure_response(
+		array(
+			'blocks' => $blocks,
+		)
+	);
 }
 
 /**

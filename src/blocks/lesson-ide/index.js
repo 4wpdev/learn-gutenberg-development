@@ -25,8 +25,8 @@ import {
 import { BUILD_LINES, DEFAULT_FILES, DEFAULT_TREE } from './constants.js';
 import { resolveIdeFileEntry } from './ide-resolve-file.js';
 import {
-	getPluginBlockDemoBySlug,
-	getPluginBlockDemoSelectOptions,
+	canSelectIdeBlockSlug,
+	formatIdeBlockCatalogOptions,
 } from './plugin-block-demos.js';
 import './style.scss';
 import './editor.scss';
@@ -643,6 +643,8 @@ function Edit( { attributes, setAttributes } ) {
 	);
 	const [ sourcesLoading, setSourcesLoading ] = useState( false );
 	const [ sourcesError, setSourcesError ] = useState( null );
+	const [ blockCatalog, setBlockCatalog ] = useState( [] );
+	const [ catalogError, setCatalogError ] = useState( null );
 	const typingIntervalRef = useRef( null );
 	const filesListRef = useRef( [] );
 	const attributesRef = useRef( attributes );
@@ -653,6 +655,37 @@ function Edit( { attributes, setAttributes } ) {
 		attributes.demoBlockSlug.length > 0
 			? attributes.demoBlockSlug
 			: 'learn-gutenberg/placeholder';
+
+	useEffect( () => {
+		let cancelled = false;
+		setCatalogError( null );
+		apiFetch( { path: '/learn-gutenberg/v1/ide-block-catalog' } )
+			.then( ( data ) => {
+				if ( cancelled ) {
+					return;
+				}
+				if ( data && Array.isArray( data.blocks ) ) {
+					setBlockCatalog( data.blocks );
+				} else {
+					setBlockCatalog( [] );
+				}
+			} )
+			.catch( ( err ) => {
+				if ( ! cancelled ) {
+					setBlockCatalog( [] );
+					setCatalogError(
+						err?.message ||
+							__(
+								'Could not load the block list for this picker.',
+								'learn-gutenberg-development'
+							)
+					);
+				}
+			} );
+		return () => {
+			cancelled = true;
+		};
+	}, [] );
 
 	useEffect( () => {
 		let cancelled = false;
@@ -793,8 +826,16 @@ function Edit( { attributes, setAttributes } ) {
 		setAttributes( { files: next } );
 	};
 
+	const ideSelectOptions = useMemo( () => {
+		const fromApi = formatIdeBlockCatalogOptions( blockCatalog );
+		if ( fromApi.length > 0 ) {
+			return fromApi;
+		}
+		return [ { label: demoSlug, value: demoSlug } ];
+	}, [ blockCatalog, demoSlug ] );
+
 	const onSelectDemoBlock = ( slug ) => {
-		if ( ! getPluginBlockDemoBySlug( slug ) ) {
+		if ( ! canSelectIdeBlockSlug( slug, blockCatalog ) ) {
 			return;
 		}
 		setAttributes( { demoBlockSlug: slug } );
@@ -820,6 +861,11 @@ function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
+				{ catalogError && (
+					<Notice status="warning" isDismissible={ false }>
+						{ catalogError }
+					</Notice>
+				) }
 				<PanelBody
 					title={ __(
 						'Plugin blocks',
@@ -833,10 +879,10 @@ function Edit( { attributes, setAttributes } ) {
 							'learn-gutenberg-development'
 						) }
 						value={ demoSlug }
-						options={ getPluginBlockDemoSelectOptions() }
+						options={ ideSelectOptions }
 						onChange={ onSelectDemoBlock }
 						help={ __(
-							'Lesson IDE is omitted. Sources are read from src/blocks on disk via REST.',
+							'Lesson IDE is omitted. Other blocks under src/blocks are listed from disk via REST.',
 							'learn-gutenberg-development'
 						) }
 					/>
