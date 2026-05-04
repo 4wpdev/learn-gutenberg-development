@@ -10,7 +10,7 @@ This repository is a **WordPress plugin** you can drop into `wp-content/plugins/
 
 - **Install-ready ZIP** (includes compiled `build/` — no `npm install` needed): download **`learn-gutenberg-development-0.1.2.zip`** from [GitHub Releases](https://github.com/4wpdev/learn-gutenberg-development/releases), then in wp-admin go to **Plugins → Add New → Upload Plugin** and activate **Learn Gutenberg Development**.
 - **Playground #1 (main branch snapshot):** [**Open in Playground**](https://playground.wordpress.net/?blueprint-url=https%3A%2F%2Fraw.githubusercontent.com%2F4wpdev%2Flearn-gutenberg-development%2Fmain%2Fplayground-blueprint.json). Blueprint: [`playground-blueprint.json`](playground-blueprint.json).
-- **Playground #2 (release ZIP v0.1.2):** [**Open in Playground (v0.1.2 ZIP)**](https://playground.wordpress.net/?blueprint-url=https%3A%2F%2Fraw.githubusercontent.com%2F4wpdev%2Flearn-gutenberg-development%2Fmain%2Fplayground-blueprint-release-0.1.2.json). Blueprint: [`playground-blueprint-release-0.1.2.json`](playground-blueprint-release-0.1.2.json).
+- **Playground #2 (tag v0.1.2):** [**Open in Playground (v0.1.2)**](https://playground.wordpress.net/?blueprint-url=https%3A%2F%2Fraw.githubusercontent.com%2F4wpdev%2Flearn-gutenberg-development%2Fmain%2Fplayground-blueprint-release-0.1.2.json). Blueprint: [`playground-blueprint-release-0.1.2.json`](playground-blueprint-release-0.1.2.json) (installs from the [v0.1.2 tag archive](https://github.com/4wpdev/learn-gutenberg-development/archive/refs/tags/v0.1.2.zip)).
 
 Build the ZIP locally (maintainers):
 
@@ -24,7 +24,7 @@ Produces `learn-gutenberg-development-0.1.2.zip` in this directory (gitignored).
 **Playground notes:**
 
 - `playground-blueprint.json` installs from the **[`main` branch archive](https://github.com/4wpdev/learn-gutenberg-development/archive/refs/heads/main.zip)**.
-- `playground-blueprint-release-0.1.2.json` installs from the **release asset URL** for `v0.1.2`.
+- `playground-blueprint-release-0.1.2.json` installs from the **[v0.1.2 tag archive](https://github.com/4wpdev/learn-gutenberg-development/archive/refs/tags/v0.1.2.zip)** (not the GitHub Releases asset ZIP).
 - Keep `build/` committed so Playground reflects the latest block code.
 
 ## Scope
