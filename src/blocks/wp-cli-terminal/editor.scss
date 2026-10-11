@@ -1,0 +1,15 @@
+/**
+ * Editor-only tweaks for WP-CLI Terminal block.
+ */
+
+.forwp-wp-cli-terminal-block {
+	max-width: none;
+}
+
+.block-editor-block-list__block[data-type="learn-gutenberg/wp-cli-terminal"] {
+	max-width: none;
+}
+
+.forwp-wp-cli-terminal-block .forwp-wp-cli-terminal__shell {
+	height: min(60vh, 560px);
+}

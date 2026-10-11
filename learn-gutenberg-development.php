@@ -27,6 +27,7 @@ define( 'LEARN_GUTENBERG_DEVELOPMENT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 require_once LEARN_GUTENBERG_DEVELOPMENT_PLUGIN_DIR . 'includes/register-block-category.php';
 require_once LEARN_GUTENBERG_DEVELOPMENT_PLUGIN_DIR . 'includes/register-blocks.php';
 require_once LEARN_GUTENBERG_DEVELOPMENT_PLUGIN_DIR . 'includes/rest-lesson-ide-sources.php';
+require_once LEARN_GUTENBERG_DEVELOPMENT_PLUGIN_DIR . 'includes/rest-wp-cli-commands.php';
 
 /**
  * Loads translations and runs lightweight init tasks.

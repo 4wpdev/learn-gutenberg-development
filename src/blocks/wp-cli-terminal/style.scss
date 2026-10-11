@@ -1,0 +1,312 @@
+/**
+ * WP-CLI Terminal — frontend + editor shared styles.
+ */
+
+.wp-block-learn-gutenberg-wp-cli-terminal.forwp-wp-cli-terminal,
+.forwp-wp-cli-terminal {
+	--forwp-cli-bg: #1e1e1e;
+	--forwp-cli-sidebar: #252526;
+	--forwp-cli-border: #3c3c3c;
+	--forwp-cli-text: #cccccc;
+	--forwp-cli-dim: #858585;
+	--forwp-cli-accent: #007acc;
+	--forwp-cli-green: #4ec9b0;
+	--forwp-cli-yellow: #dcdcaa;
+	--forwp-cli-error: #f48771;
+}
+
+.forwp-wp-cli-terminal {
+	box-sizing: border-box;
+	font-family: "SF Mono", "Cascadia Code", "Segoe UI Mono", Menlo, Consolas, monospace;
+	font-size: 13px;
+	line-height: 1.5;
+	color: var(--forwp-cli-text);
+	min-height: 480px;
+}
+
+.forwp-wp-cli-terminal *,
+.forwp-wp-cli-terminal *::before,
+.forwp-wp-cli-terminal *::after {
+	box-sizing: border-box;
+}
+
+.forwp-wp-cli-terminal--booting .forwp-wp-cli-terminal__body {
+	opacity: 0.35;
+	pointer-events: none;
+}
+
+.forwp-wp-cli-terminal__shell {
+	display: flex;
+	flex-direction: column;
+	background: var(--forwp-cli-bg);
+	border: 1px solid var(--forwp-cli-border);
+	border-radius: 8px;
+	overflow: hidden;
+	min-height: 480px;
+	height: min(70vh, 640px);
+}
+
+.forwp-wp-cli-terminal__header {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 10px 14px;
+	background: #2d2d2d;
+	border-bottom: 1px solid var(--forwp-cli-border);
+	flex-shrink: 0;
+}
+
+.forwp-wp-cli-terminal__dot {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	flex-shrink: 0;
+}
+
+.forwp-wp-cli-terminal__dot--red {
+	background: #ff5f57;
+}
+
+.forwp-wp-cli-terminal__dot--yellow {
+	background: #febc2e;
+}
+
+.forwp-wp-cli-terminal__dot--green {
+	background: #28c840;
+}
+
+.forwp-wp-cli-terminal__title {
+	margin-left: 8px;
+	font-size: 12px;
+	color: var(--forwp-cli-dim);
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.forwp-wp-cli-terminal__body {
+	display: flex;
+	flex: 1;
+	min-height: 0;
+}
+
+.forwp-wp-cli-terminal__main {
+	flex: 2;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	border-right: 1px solid var(--forwp-cli-border);
+}
+
+.forwp-wp-cli-terminal__output {
+	flex: 1;
+	overflow: auto;
+	padding: 12px 14px;
+	min-height: 0;
+}
+
+.forwp-wp-cli-terminal__line {
+	margin-bottom: 8px;
+}
+
+.forwp-wp-cli-terminal__line--system {
+	color: var(--forwp-cli-dim);
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	font-size: 12px;
+}
+
+.forwp-wp-cli-terminal__line--command {
+	color: var(--forwp-cli-yellow);
+}
+
+.forwp-wp-cli-terminal__line--response {
+	color: var(--forwp-cli-text);
+}
+
+.forwp-wp-cli-terminal__line--tip {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	font-size: 12px;
+}
+
+.forwp-wp-cli-terminal__line--error {
+	color: var(--forwp-cli-error);
+}
+
+.forwp-wp-cli-terminal__prompt {
+	color: var(--forwp-cli-green);
+	font-weight: 600;
+}
+
+.forwp-wp-cli-terminal__pre {
+	margin: 0;
+	white-space: pre-wrap;
+	word-break: break-word;
+	font-family: inherit;
+	font-size: inherit;
+}
+
+.forwp-wp-cli-terminal__tip {
+	padding: 8px 10px;
+	background: rgba(0, 122, 204, 0.12);
+	border-left: 3px solid var(--forwp-cli-accent);
+	border-radius: 0 4px 4px 0;
+	color: #9cdcfe;
+}
+
+.forwp-wp-cli-terminal__doc-link {
+	color: var(--forwp-cli-accent);
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+.forwp-wp-cli-terminal__doc-link:hover,
+.forwp-wp-cli-terminal__doc-link:focus {
+	color: #4fc1ff;
+}
+
+.forwp-wp-cli-terminal__form {
+	flex-shrink: 0;
+	padding: 0 14px 12px;
+	border-top: 1px solid var(--forwp-cli-border);
+	background: rgba(0, 0, 0, 0.15);
+}
+
+.forwp-wp-cli-terminal__input-row {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	width: 100%;
+}
+
+.forwp-wp-cli-terminal__input {
+	flex: 1;
+	min-width: 0;
+	background: transparent;
+	border: none;
+	color: var(--forwp-cli-text);
+	font: inherit;
+	padding: 10px 0;
+	outline: none;
+}
+
+.forwp-wp-cli-terminal__input:focus {
+	outline: none;
+}
+
+.forwp-wp-cli-terminal__sidebar {
+	flex: 1;
+	min-width: 220px;
+	max-width: 320px;
+	background: var(--forwp-cli-sidebar);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.forwp-wp-cli-terminal__sidebar-title {
+	margin: 0;
+	padding: 12px 14px 8px;
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--forwp-cli-dim);
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	border-bottom: 1px solid var(--forwp-cli-border);
+}
+
+.forwp-wp-cli-terminal__sidebar-list {
+	flex: 1;
+	overflow: auto;
+	padding: 8px;
+}
+
+.forwp-wp-cli-terminal__cat {
+	border: 1px solid var(--forwp-cli-border);
+	border-radius: 6px;
+	margin-bottom: 8px;
+	background: rgba(0, 0, 0, 0.2);
+}
+
+.forwp-wp-cli-terminal__cat-head {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 10px;
+	cursor: pointer;
+	list-style: none;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--forwp-cli-text);
+}
+
+.forwp-wp-cli-terminal__cat-head::-webkit-details-marker {
+	display: none;
+}
+
+.forwp-wp-cli-terminal__cat-dot {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: var(--forwp-cli-cat-color, var(--forwp-cli-accent));
+	flex-shrink: 0;
+}
+
+.forwp-wp-cli-terminal__cat-body {
+	padding: 4px 6px 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.forwp-wp-cli-terminal__cmd {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 2px;
+	width: 100%;
+	padding: 6px 8px;
+	border: none;
+	border-radius: 4px;
+	background: transparent;
+	color: inherit;
+	text-align: left;
+	cursor: pointer;
+	font: inherit;
+	transition: background 0.15s ease;
+}
+
+.forwp-wp-cli-terminal__cmd:hover,
+.forwp-wp-cli-terminal__cmd:focus {
+	background: rgba(255, 255, 255, 0.06);
+	outline: none;
+}
+
+.forwp-wp-cli-terminal__cmd-text {
+	color: var(--forwp-cli-green);
+	font-size: 11px;
+	word-break: break-all;
+}
+
+.forwp-wp-cli-terminal__cmd-desc {
+	color: var(--forwp-cli-dim);
+	font-size: 11px;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	line-height: 1.35;
+}
+
+@media (max-width: 782px) {
+	.forwp-wp-cli-terminal__body {
+		flex-direction: column;
+	}
+
+	.forwp-wp-cli-terminal__main {
+		border-right: none;
+		border-bottom: 1px solid var(--forwp-cli-border);
+		min-height: 280px;
+	}
+
+	.forwp-wp-cli-terminal__sidebar {
+		max-width: none;
+		max-height: 240px;
+	}
+}
